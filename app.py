@@ -184,17 +184,19 @@ if page == "Add Expense":
     left, right = st.columns([1, 1], gap="large")
     with left:
         st.markdown('<p class="section-label">Amount (INR)</p>', unsafe_allow_html=True)
-        amount = st.number_input("Amount", min_value=0.0, step=1.0, format="%.2f", label_visibility="collapsed")
+        amount = st.text_input("Amount", placeholder="Enter amount")
         st.markdown('<p class="section-label">Description</p>', unsafe_allow_html=True)
         description = st.text_input("Description", placeholder="e.g. lunch at cafe, uber to office, new headphones", label_visibility="collapsed")
         if st.button("Save Expense"):
-            if amount <= 0:
-                st.error("Enter an amount greater than zero.")
-            elif not description.strip():
-                st.error("Enter a short description.")
-            else:
-                cat = add_expense(amount, description.strip())
-                st.success(f"Saved  —  detected category: **{cat.capitalize()}**")
+            try:
+                amount = float(amount)
+                if amount <= 0:
+                    st.error("Enter an amount greater than zero.")
+                elif not description.strip():
+                     st.error("Enter a short description.")
+                else:
+                     cat = add_expense(amount, description.strip())
+                    st.success(f"Saved  —  detected category: **{cat.capitalize()}**")
 
     with right:
         st.markdown('<p class="section-label">Category Rules</p>', unsafe_allow_html=True)
