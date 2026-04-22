@@ -225,7 +225,7 @@ elif page == "View Expenses":
         def _sc(v):
             return f"background-color:{BG.get(v,'#f8fafc')};color:{FG.get(v,'#334155')};font-weight:600;"
         disp = df.rename(columns={"id":"ID","date":"Date","amount":"Amount (INR)","category":"Category","description":"Description"})
-        st.dataframe(disp.style.applymap(_sc, subset=["Category"]), use_container_width=True, hide_index=True)
+        st.dataframe(disp, use_container_width=True, hide_index=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # PAGE: SPENDING CHART
